@@ -4,3 +4,6 @@
 *.ptx
 *.cubin
 *.fatbin
+
+# Build output directory (per-example binaries)
+bin/

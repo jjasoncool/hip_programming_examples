@@ -1,4 +1,14 @@
-all: main
+BIN_DIR = bin
 
-main: main.c
-	gcc -o main main.c -lpthread
+all: $(BIN_DIR)/main
+
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+
+$(BIN_DIR)/main: main.c | $(BIN_DIR)
+	gcc -o $@ $< -lpthread
+
+clean:
+	rm -rf $(BIN_DIR)
+
+.PHONY: all clean

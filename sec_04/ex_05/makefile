@@ -1,18 +1,22 @@
 HIPCC = hipcc
 HIPCC_FLAGS = -O2 -std=c++17
 
-TARGET = hip_events
+BIN_DIR = bin
+TARGET = $(BIN_DIR)/hip_events
 SRC = hip_events.cpp
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+
+$(TARGET): $(SRC) | $(BIN_DIR)
 	$(HIPCC) $(HIPCC_FLAGS) $< -o $@
 
 run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(TARGET)
+	rm -rf $(BIN_DIR)
 
 .PHONY: all run clean
